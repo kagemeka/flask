@@ -17,3 +17,4 @@ services:
         read_only: false 
         volume:
           nocopy: true
+    working_dir: /root/$PROJECT
