@@ -5,12 +5,17 @@ from flask import (
   request,
   redirect,
   url_for,
+  jsonify,
 )
 from werkzeug.utils import (
   secure_filename,
 )
 
 import os 
+import time
+
+import asyncio
+
 
 
 def set_globals():
@@ -20,6 +25,13 @@ def set_globals():
   )
   cfd = os.path.abspath(cfd)
   root = f'{cfd}/../'
+
+
+
+async def sleep():
+  for i in range(10):
+    time.sleep(1)
+    await asyncio.sleep(0.01)
 
 
 def main():
@@ -37,7 +49,7 @@ def main():
     '/',
     methods=['GET', 'POST'],
   )
-  def upload():
+  async def upload():
     if (
       request.method != 'POST'
     ):
@@ -58,6 +70,18 @@ def main():
       f'{upload_dir}/'
       f'{filename}'
     )
+    # time.sleep(10)
+    data = {
+      'success': True,
+    }
+    # await asyncio.sleep(10)
+    # await asyncio.sleep(10)
+    await sleep()
+    await sleep()
+    # return redirect('https://twitter.com')
+    ret = jsonify(data)
+    print(ret)
+    return ret 
     return '''
     <!doctype html>
     <title>Upload new File</title>
