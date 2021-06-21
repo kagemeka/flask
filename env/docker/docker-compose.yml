@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  main:
+    build:
+      context: ..
+      dockerfile: 
+        docker/Dockerfile
+    image: kagemeka/flask
+
+    restart: always
+    tty: true
+    volumes:
+      - type: bind
+        source: $ROOT
+        target: /root/$PROJECT
+        read_only: false 
+        volume:
+          nocopy: true
